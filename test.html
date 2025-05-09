@@ -6,14 +6,42 @@
 </head>
 <body>
   <h1>🌾 위치 기반 농업 분석</h1>
-  <label>위도 (lat): <input type="number" id="lat" value="36.5"></label><br><br>
-  <label>경도 (lng): <input type="number" id="lng" value="127.5"></label><br><br>
+
+  <label>주소 입력: <input type="text" id="address" placeholder="예: 서울특별시 중구 세종대로 110"></label>
+  <button onclick="convertAddress()">주소 변환</button><br><br>
+
+  <label>위도 (lat): <input type="number" id="lat" value="36.5" step="any"></label><br><br>
+  <label>경도 (lng): <input type="number" id="lng" value="127.5" step="any"></label><br><br>
   <button onclick="analyze()">분석 요청</button>
 
   <h2>결과</h2>
   <pre id="result">아직 결과 없음</pre>
 
   <script>
+    async function convertAddress() {
+      const address = document.getElementById('address').value;
+      if (!address) {
+        alert("주소를 입력해주세요.");
+        return;
+      }
+
+      try {
+        const res = await fetch(`http://localhost:3000/location?address=${encodeURIComponent(address)}`);
+        const data = await res.json();
+
+        if (data.lat && data.lng) {
+          document.getElementById('lat').value = data.lat;
+          document.getElementById('lng').value = data.lng;
+          alert("주소가 위도/경도로 변환되었습니다!");
+        } else {
+          alert(data.error || "위경도 변환 실패");
+        }
+      } catch (err) {
+        console.error("주소 변환 에러:", err);
+        alert("서버 오류가 발생했습니다.");
+      }
+    }
+
     async function analyze() {
       const lat = parseFloat(document.getElementById('lat').value);
       const lng = parseFloat(document.getElementById('lng').value);
