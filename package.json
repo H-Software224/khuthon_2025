@@ -1,0 +1,21 @@
+{
+  "name": "khuthon_2025",
+  "version": "1.0.0",
+  "description": "khuthon 2025(주제: 농업의 기술화)",
+  "main": "gemini_model.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/genai": "^0.13.0",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "node-fetch": "^2.7.0"
+  }
+}
