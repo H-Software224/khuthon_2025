@@ -27,7 +27,7 @@ app.post('/analyze', async (req, res) => {
     return res.status(400).json({ error: 'lat, lng 파라미터가 필요합니다.' });
   }
 
-  const prompt = `위도 ${lat}, 경도 ${lng}에 위치한 지역이 농업에 적합한지 분석해줘. 토양, 기후, 지형 등을 고려해서 알려줘.`;
+  const prompt = `위도 ${lat}, 경도 ${lng}에 위치한 지역이 농업에 적합한지 분석해줘. 토양, 기후, 지형 등을 고려해서 알려줘. 마지막으로 만약 농사에 적합하면 어떠한 과일이 잘 자라고 어떠한 최소가 잘 자라는지 설명해줘.`;
 
   try {
     const result = await ai.models.generateContent({
