@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>농업 적합성 분석 테스트</title>
+</head>
+<body>
+  <h1>🌾 위치 기반 농업 분석</h1>
+  <label>위도 (lat): <input type="number" id="lat" value="36.5"></label><br><br>
+  <label>경도 (lng): <input type="number" id="lng" value="127.5"></label><br><br>
+  <button onclick="analyze()">분석 요청</button>
+
+  <h2>결과</h2>
+  <pre id="result">아직 결과 없음</pre>
+
+  <script>
+    async function analyze() {
+      const lat = parseFloat(document.getElementById('lat').value);
+      const lng = parseFloat(document.getElementById('lng').value);
+
+      const response = await fetch('http://localhost:3000/analyze', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ lat, lng })
+      });
+
+      const data = await response.json();
+      document.getElementById('result').textContent = data.result || "결과 없음";
+    }
+  </script>
+</body>
+</html>
