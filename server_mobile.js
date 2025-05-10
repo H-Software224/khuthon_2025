@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const ai = new GoogleGenAI({
-  apiKey: 'AIzaSyC5bMvjeTzYkLcTv-cTn3AblwtvZP4FzA0'
+  apiKey: 'YOUR GEMINI API KEY'
 });
 
 
@@ -56,7 +56,7 @@ app.get('/location', async (req, res) => {
     if (address) {
       // 주소 → 위경도
       const encodedAddress = encodeURIComponent(address);
-      const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=AIzaSyDIv9Q9oZrl2o1L2mrwWD89Eg8d36uo0YE`;
+      const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key={"YOUR GOOGLE MAP API KEY"}`;
       const response = await fetch(url);
       const data = await response.json();
 
@@ -68,7 +68,7 @@ app.get('/location', async (req, res) => {
       }
     } else if (lat && lng) {
       // 위경도 → 주소
-      const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDIv9Q9oZrl2o1L2mrwWD89Eg8d36uo0YE`;
+      const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key={"YOUR GOOGLE MAP API KEY"}`;
       const response = await fetch(url);
       const data = await response.json();
 
